@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MOTIF Café &amp; Restaurant</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+    :root {
+      --bg: #89977A;
+      --surface: #F4F7F3;
+      --surface-2: #E8EEE4;
+      --line: #D6E2D3;
+      --text: #233229;
+      --muted: #5E6F60;
+      --dark-green: #4E5D46;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Vazirmatn", sans-serif;
+      color: var(--text);
+
+      /*
+        فضای کافی برای Bottom Bar
+        تا آخرین آیتم زیر نوار پایین نرود
+      */
+      padding-bottom: 100px;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(255,255,255,.8);
+      outline-offset: 3px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background: #89977A;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* افکت محو شدن از بالای عکس */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        #89977A 0%,
+        rgba(137,151,122,0.95) 8%,
+        rgba(137,151,122,0.75) 18%,
+        rgba(137,151,122,0.45) 32%,
+        rgba(137,151,122,0.15) 48%,
+        rgba(137,151,122,0) 65%
+    );
+    z-index: 2;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+    .logo {
+    width: 100%;
+    height: 540px;
+    object-fit: cover;
+    }
+
+    h1 {
+      margin: 10px 0 0;
+
+      color: #fff;
+
+      font-family: "Playfair Display", serif;
+
+      font-size: 2.8rem;
+      letter-spacing: 6px;
+    }
+
+    .subtitle {
+      color: #fff;
+      opacity: .9;
+
+      font-family: "Playfair Display", serif;
+
+      letter-spacing: 3px;
+      font-size: .9rem;
+
+      margin-top: 6px;
+    }
+
+    /* =========================
+       TOP NAV
+    ========================= */
+
+    .top-nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:16px auto 0;
+    position:static;
+}
+
+.top-nav button{
+    background: rgba(255,255,255,.18);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.35);
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    font-family:"Vazirmatn", sans-serif;
+    font-weight:600;
+}
+
+.top-nav button.active{
+    background:#fff;
+    color:#4E5D46;
+}
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 760px;
+
+      margin: 0 auto;
+
+      padding: 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: pageFade .25s ease;
+    }
+
+    @keyframes pageFade {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-title {
+      color: #fff;
+
+      font-size: 1.2rem;
+
+      margin: 0 0 14px;
+    }
+
+    /* =========================
+       CARD
+    ========================= */
+
+    .card {
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 5px 18px rgba(35,50,41,.06);
+    }
+
+    .card-title {
+      padding: 16px 18px;
+
+      background: var(--surface-2);
+
+      border-bottom: 1px solid var(--line);
+
+      font-weight: 700;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+      text-align: left;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: 700;
+    }
+
+    .item-desc {
+      font-size: .82rem;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+    }
+
+
+    .item-image {
+      width: 84px;
+      height: 84px;
+      flex-shrink: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #E8EEE4;
+    }
+
+    .item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .price {
+      margin-top: 6px;
+      color: var(--dark-green);
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    /* =====================================================
+       BOTTOM BAR
+    ===================================================== */
+
+    .bottom-bar {
+      position: fixed;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 100%;
+
+      min-height: 72px;
+
+      background: rgba(244,247,243,.98);
+
+      border-top: 1px solid var(--line);
+
+      box-shadow:
+        0 -5px 25px rgba(0,0,0,.10);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      padding:
+        10px
+        max(16px, env(safe-area-inset-right))
+        calc(10px + env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+
+      z-index: 99999;
+
+      direction: ltr;
+    }
+
+    /* =====================================================
+       MENU BUTTON - RIGHT
+    ===================================================== */
+
+    .menu-toggle {
+      appearance: none;
+
+      background: var(--bg);
+
+      color: #fff;
+
+      border: none;
+
+      min-height: 38px;
+
+      padding: 8px 17px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .85rem;
+
+      font-weight: 600;
+
+      white-space: nowrap;
+
+      box-shadow:
+        0 4px 12px rgba(0,0,0,.12);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+    }
+
+    .menu-toggle:hover {
+      opacity: .94;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 6px 15px rgba(0,0,0,.16);
+    }
+
+    .menu-toggle:active {
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       LANGUAGE - LEFT
+    ===================================================== */
+
+    .lang {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      direction: ltr;
+    }
+
+    .lang button {
+      appearance: none;
+
+      border: 1px solid var(--line);
+
+      background: #fff;
+
+      color: var(--dark-green);
+
+      min-height: 36px;
+
+      padding: 6px 12px;
+
+      border-radius: 999px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .8rem;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .lang button:hover {
+      transform: translateY(-1px);
+    }
+
+    .lang button.active {
+      background: var(--bg);
+
+      color: #fff;
+
+      border-color: var(--bg);
+    }
+
+    /* =====================================================
+       MENU PANEL
+    ===================================================== */
+
+    .menu-panel {
+      position: fixed;
+
+      left: 50%;
+
+      bottom: 82px;
+
+      width: min(420px, calc(100% - 32px));
+
+      max-height: calc(100vh - 115px);
+
+      overflow-y: auto;
+
+      transform: translateX(-50%) translateY(20px);
+
+      background: rgba(244,247,243,.99);
+
+      border: 1px solid var(--line);
+
+      border-radius: 24px;
+
+      padding: 18px;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.20);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      z-index: 99998;
+
+      transition:
+        opacity .22s ease,
+        transform .22s ease,
+        visibility .22s ease;
+    }
+
+    .menu-panel.show {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .menu-panel-title {
+      font-weight: 800;
+
+      color: var(--dark-green);
+
+      margin-bottom: 14px;
+
+      text-align: center;
+
+      font-size: 1rem;
+    }
+
+    /*
+      تک ستونه
+      وسط چین
+    */
+
+    .menu-links {
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 9px;
+
+      width: 100%;
+    }
+
+    .menu-link {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #fff;
+
+      color: var(--dark-green);
+
+      padding: 11px 14px;
+
+      border-radius: 14px;
+
+      cursor: pointer;
+
+      font-family: "Vazirmatn", sans-serif;
+
+      font-size: .9rem;
+
+      font-weight: 600;
+
+      text-align: center;
+
+      transition:
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .menu-link:hover {
+      background: var(--surface-2);
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 4px 10px rgba(35,50,41,.07);
+    }
+
+    .menu-link:active {
+      transform: translateY(0);
+    }
+
+    /* =====================================================
+       MENU OVERLAY
+    ===================================================== */
+
+    .menu-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(35,50,41,.20);
+
+      backdrop-filter: blur(2px);
+
+      -webkit-backdrop-filter: blur(2px);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      z-index: 99997;
+
+      transition:
+        opacity .22s ease,
+        visibility .22s ease;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 480px) {
+
+      body {
+        padding-bottom: 94px;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      h1 {
+        font-size: 2.3rem;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      .item {
+        gap: 10px;
+      }
+
+      .price {
+        padding: 7px 11px;
+        font-size: .85rem;
+      }
+
+      .menu-panel {
+        bottom: 80px;
+
+        width: calc(100% - 24px);
+
+        border-radius: 20px;
+
+        padding: 15px;
+      }
+
+      .menu-toggle {
+        padding: 8px 14px;
+
+        font-size: .8rem;
+      }
+
+      .lang button {
+        padding: 6px 10px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<!-- =====================================================
+       HEADER
+  ====================================================== -->
+<header class="hero">
+<img alt="MOTIF Café" src="images/cafe-banner.jpeg"/>
+<div class="hero-overlay">
+<h1>MOTIF</h1>
+<div class="subtitle">CAFÉ &amp; RESTAURANT</div>
+</div>
+</header>
+<div class="top-nav">
+<button class="active" data-en="Cafe" data-fa="کافه" id="cafeBtn" onclick="showPage('cafe')">کافه</button>
+<button data-en="Food" data-fa="غذا" id="foodBtn" onclick="showPage('food')">غذا</button>
+<button data-en="Breakfast" data-fa="صبحانه" id="breakfastBtn" onclick="showPage('breakfast')">صبحانه</button>
+<button data-en="Hookah" data-fa="قلیان" id="hookahBtn" onclick="showPage('hookah')">قلیان</button>
+</div>
+<!-- =====================================================
+       MAIN
+  ====================================================== -->
+<main>
+<div class="container">
+<!-- =================================================
+           CAFE
+      ================================================== -->
+<section class="page active" id="cafe">
+<h2 class="section-title" data-en="Cafe" data-fa="کافه">
+          کافه
+        </h2>
+<!-- ESPRESSO -->
+<div class="card">
+<div class="card-title" data-en="Espresso Based" data-fa="اسپرسو بیس">
+            اسپرسو بیس
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Espresso" data-fa="اسپرسو">
+                اسپرسو
+              </div>
+<div class="item-desc" data-en="Pure espresso from Arabica and Robusta coffee beans." data-fa="عصاره خالص قهوه عربیکا و روبوستا">
+                عصاره خالص قهوه عربیکا و روبوستا
+              </div>
+<div class="price">
+                75,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Americano" data-fa="آمریکانو">
+                آمریکانو
+              </div>
+<div class="item-desc" data-en="Espresso with hot water." data-fa="اسپرسو، آب داغ">
+                اسپرسو، آب داغ
+              </div>
+<div class="price">
+                95,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Cappuccino" data-fa="کاپوچینو">
+                کاپوچینو
+              </div>
+<div class="item-desc" data-en="Espresso, steamed milk and milk foam." data-fa="اسپرسو، شیر بخار داده شده، فوم شیر">
+                اسپرسو، شیر بخار داده شده، فوم شیر
+              </div>
+<div class="price">
+                120,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Latte" data-fa="لاته">
+                لاته
+              </div>
+<div class="item-desc" data-en="Espresso, steamed milk and a light layer of milk foam." data-fa="اسپرسو، شیر بخار داده شده، لایه نازک فوم شیر">
+                اسپرسو، شیر بخار داده شده، لایه نازک فوم شیر
+              </div>
+<div class="price">
+                130,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mocha" data-fa="موکا">
+                موکا
+              </div>
+<div class="item-desc" data-en="Espresso, milk, chocolate and whipped cream." data-fa="اسپرسو، شیر، شکلات، خامه فرم گرفته">
+                اسپرسو، شیر، شکلات، خامه فرم گرفته
+              </div>
+<div class="price">
+                145,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<!-- ICE -->
+<div class="card">
+<div class="card-title" data-en="Iced Drinks" data-fa="آیس">
+            آیس
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Iced Americano" data-fa="آیس آمریکانو">آیس آمریکانو</div>
+<div class="item-desc" data-en="Espresso, cold water and ice." data-fa="اسپرسو، آب سرد، یخ">اسپرسو، آب سرد، یخ</div>
+<div class="price">
+                105,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Iced Latte" data-fa="آیس لاته">آیس لاته</div>
+<div class="item-desc" data-en="Espresso, cold milk and ice." data-fa="اسپرسو، شیر سرد، یخ">اسپرسو، شیر سرد، یخ</div>
+<div class="price">
+                135,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Iced Mocha" data-fa="آیس موکا">آیس موکا</div>
+<div class="item-desc" data-en="Espresso, milk, chocolate and ice." data-fa="اسپرسو، شیر، شکلات، یخ">اسپرسو، شیر، شکلات، یخ</div>
+<div class="price">
+                150,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Frappe" data-fa="فراپه">فراپه</div>
+<div class="item-desc" data-en="Instant coffee, milk, ice and sugar." data-fa="قهوه فوری، شیر، یخ، شکر">قهوه فوری، شیر، یخ، شکر</div>
+<div class="price">
+                155,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Espresso Tonic" data-fa="اسپرسو تونیک">اسپرسو تونیک</div>
+<div class="item-desc" data-en="Espresso, tonic water, ice and a lemon slice." data-fa="اسپرسو، تونیک واتر، یخ، برش لیمو">اسپرسو، تونیک واتر، یخ، برش لیمو</div>
+<div class="price">
+                165,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<!-- SHAKE -->
+<div class="card">
+<div class="card-title" data-en="Milkshakes" data-fa="شیک">
+            شیک
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Chocolate Shake" data-fa="شیک شکلات">شیک شکلات</div>
+<div class="item-desc" data-en="Chocolate ice cream, milk and chocolate sauce." data-fa="بستنی شکلاتی، شیر، سس شکلات">بستنی شکلاتی، شیر، سس شکلات</div>
+<div class="price">
+                165,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Nutella Shake" data-fa="شیک نوتلا">شیک نوتلا</div>
+<div class="item-desc" data-en="Nutella, vanilla ice cream and milk." data-fa="نوتلا، بستنی وانیلی، شیر">نوتلا، بستنی وانیلی، شیر</div>
+<div class="price">
+                185,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Vanilla Shake" data-fa="شیک وانیل">شیک وانیل</div>
+<div class="item-desc" data-en="Vanilla ice cream, milk and vanilla." data-fa="بستنی وانیلی، شیر، وانیل">بستنی وانیلی، شیر، وانیل</div>
+<div class="price">
+                155,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Espresso Shake" data-fa="شیک اسپرسو">شیک اسپرسو</div>
+<div class="item-desc" data-en="Espresso, vanilla ice cream and milk." data-fa="اسپرسو، بستنی وانیلی، شیر">اسپرسو، بستنی وانیلی، شیر</div>
+<div class="price">
+                175,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Peanut Butter Shake" data-fa="شیک پینات باتر">شیک پینات باتر</div>
+<div class="item-desc" data-en="Peanut butter, ice cream and milk." data-fa="کره بادام‌زمینی، بستنی، شیر">کره بادام‌زمینی، بستنی، شیر</div>
+<div class="price">
+                185,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<!-- SMOOTHIE -->
+<div class="card">
+<div class="card-title" data-en="Smoothies" data-fa="اسموتی">
+            اسموتی
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mango Smoothie" data-fa="اسموتی انبه">اسموتی انبه</div>
+<div class="item-desc" data-en="Mango, ice and mango syrup." data-fa="انبه، یخ، شربت انبه">انبه، یخ، شربت انبه</div>
+<div class="price">
+                165,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Strawberry Smoothie" data-fa="اسموتی توت‌فرنگی">اسموتی توت‌فرنگی</div>
+<div class="item-desc" data-en="Fresh strawberries, ice and strawberry syrup." data-fa="توت‌فرنگی تازه، یخ، شربت توت‌فرنگی">توت‌فرنگی تازه، یخ، شربت توت‌فرنگی</div>
+<div class="price">
+                170,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mango Banana Smoothie" data-fa="اسموتی موز و انبه">اسموتی موز و انبه</div>
+<div class="item-desc" data-en="Banana, mango and ice." data-fa="موز، انبه، یخ">موز، انبه، یخ</div>
+<div class="price">
+                175,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mixed Berry Smoothie" data-fa="اسموتی بری میکس">اسموتی بری میکس</div>
+<div class="item-desc" data-en="Strawberry, blueberry and raspberry." data-fa="توت‌فرنگی، بلوبری، تمشک">توت‌فرنگی، بلوبری، تمشک</div>
+<div class="price">
+                185,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Green Smoothie" data-fa="اسموتی سبز">اسموتی سبز</div>
+<div class="item-desc" data-en="Spinach, apple, cucumber and lemon." data-fa="اسفناج، سیب، خیار، لیمو">اسفناج، سیب، خیار، لیمو</div>
+<div class="price">
+                170,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<!-- MOCKTAIL -->
+<div class="card">
+<div class="card-title" data-en="Mocktails" data-fa="ماکتیل">
+            ماکتیل
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Classic Mojito" data-fa="موهیتو کلاسیک">موهیتو کلاسیک</div>
+<div class="item-desc" data-en="Fresh mint, lemon, sugar and soda." data-fa="نعناع تازه، لیمو، شکر، سودا">نعناع تازه، لیمو، شکر، سودا</div>
+<div class="price">
+                140,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Blue Mojito" data-fa="بلو موهیتو">بلو موهیتو</div>
+<div class="item-desc" data-en="Blue syrup, lemon, mint and soda." data-fa="سیروپ بلو، لیمو، نعناع، سودا">سیروپ بلو، لیمو، نعناع، سودا</div>
+<div class="price">
+                155,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mint Lemonade" data-fa="لیموناد نعناع">لیموناد نعناع</div>
+<div class="item-desc" data-en="Lemon juice, mint, sugar and ice." data-fa="آب لیمو، نعناع، شکر، یخ">آب لیمو، نعناع، شکر، یخ</div>
+<div class="price">
+                135,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Passion Fruit Mocktail" data-fa="پشن فروت ماکتیل">پشن فروت ماکتیل</div>
+<div class="item-desc" data-en="Passion fruit, lemon and soda." data-fa="پشن فروت، لیمو، سودا">پشن فروت، لیمو، سودا</div>
+<div class="price">
+                165,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Tropical (Mango-Pineapple)" data-fa="استوایی (مانگو-پاین)">استوایی (مانگو-پاین)</div>
+<div class="item-desc" data-en="Mango, pineapple and soda." data-fa="انبه، آناناس، سودا">انبه، آناناس، سودا</div>
+<div class="price">
+                175,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<!-- TEA -->
+<div class="card">
+<div class="card-title" data-en="Tea &amp; Herbal Infusions" data-fa="چای و دمنوش">
+            چای و دمنوش
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Persian Black Tea" data-fa="چای ایرانی">چای ایرانی</div>
+<div class="item-desc" data-en="Brewed Persian black tea." data-fa="چای سیاه ایرانی دم‌کشیده">چای سیاه ایرانی دم‌کشیده</div>
+<div class="price">
+                70,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Masala Tea" data-fa="چای ماسالا">چای ماسالا</div>
+<div class="item-desc" data-en="Black tea, milk and masala spices." data-fa="چای سیاه، شیر، ادویه ماسالا">چای سیاه، شیر، ادویه ماسالا</div>
+<div class="price">
+                125,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mint Herbal Tea" data-fa="دمنوش نعناع">دمنوش نعناع</div>
+<div class="item-desc" data-en="Fresh mint leaves." data-fa="برگ نعناع تازه">برگ نعناع تازه</div>
+<div class="price">
+                90,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Lemon Verbena Tea" data-fa="دمنوش به‌لیمو">دمنوش به‌لیمو</div>
+<div class="item-desc" data-en="Dried lemon verbena leaves." data-fa="برگ به‌لیمو خشک">برگ به‌لیمو خشک</div>
+<div class="price">
+                95,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Relaxation Herbal Tea" data-fa="دمنوش آرامش">دمنوش آرامش</div>
+<div class="item-desc" data-en="Chamomile, lavender and lemon verbena." data-fa="بابونه، اسطوخودوس، به‌لیمو">بابونه، اسطوخودوس، به‌لیمو</div>
+<div class="price">
+                100,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================
+           FOOD
+      ================================================== -->
+<section class="page" id="food">
+<h2 class="section-title" data-en="Food" data-fa="غذا">
+          غذا
+        </h2>
+<div class="card">
+<div class="card-title" data-en="Appetizers" data-fa="پیش غذا">
+            پیش غذا
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="French Fries" data-fa="سیب زمینی">سیب زمینی</div>
+<div class="item-desc" data-en="Golden, crispy potatoes, perfect for sharing." data-fa="سیب‌زمینی طلایی و ترد، مناسب برای اشتراک‌گذاری">سیب‌زمینی طلایی و ترد، مناسب برای اشتراک‌گذاری</div>
+<div class="price">
+                285,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Baked Potatoes" data-fa="سیب تنوری">سیب تنوری</div>
+<div class="item-desc" data-en="Baked potatoes with house seasoning and special sauce." data-fa="سیب‌زمینی تنوری با ادویه مخصوص و سس مخصوص">سیب‌زمینی تنوری با ادویه مخصوص و سس مخصوص</div>
+<div class="price">
+                265,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Cheesy Fries" data-fa="سیب پنیری">سیب پنیری</div>
+<div class="item-desc" data-en="Crispy potatoes with mozzarella and cheese sauce." data-fa="سیب‌زمینی با پنیر موزارلا و سس پنیر">سیب‌زمینی با پنیر موزارلا و سس پنیر</div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Smoky Fries" data-fa="سیب اسموکی">سیب اسموکی</div>
+<div class="item-desc" data-en="Crispy potatoes with cheddar and smoky sauce." data-fa="سیب‌زمینی با پنیر چدار و سس اسموکی">سیب‌زمینی با پنیر چدار و سس اسموکی</div>
+<div class="price">
+                340,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Loaded Fries Dip" data-fa="دیپ سیب">دیپ سیب</div>
+<div class="item-desc" data-en="Crispy potatoes with special dip and jalapeño." data-fa="سیب‌زمینی با دیپ مخصوص و هالوپینو">سیب‌زمینی با دیپ مخصوص و هالوپینو</div>
+<div class="price">
+                305,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title" data-en="Pasta &amp; Lasagna" data-fa="پاستا و لازانیا">
+            پاستا و لازانیا
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Alfredo Pasta" data-fa="آلفردو">آلفردو</div>
+<div class="item-desc" data-en="Pasta with grilled chicken, mushrooms and creamy Alfredo sauce." data-fa="پاستا با مرغ گریل‌شده، قارچ و سس خامه‌ای آلفردو">پاستا با مرغ گریل‌شده، قارچ و سس خامه‌ای آلفردو</div>
+<div class="price">
+                285,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Pesto Pasta" data-fa="پستو">پستو</div>
+<div class="item-desc" data-en="Pasta with pesto, fresh basil and Parmesan." data-fa="پاستا با سس پستو، ریحان تازه و پنیر پارمزان">پاستا با سس پستو، ریحان تازه و پنیر پارمزان</div>
+<div class="price">
+                265,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Penne Arrabbiata" data-fa="پنه">پنه</div>
+<div class="item-desc" data-en="Penne with tomato sauce and Italian herbs." data-fa="پنه با سس گوجه و ادویه ایتالیایی">پنه با سس گوجه و ادویه ایتالیایی</div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mixed Pasta" data-fa="مخلوط">مخلوط</div>
+<div class="item-desc" data-en="A mix of chicken, beef, mushrooms and mozzarella." data-fa="ترکیب مرغ، گوشت، قارچ و پنیر موزارلا">ترکیب مرغ، گوشت، قارچ و پنیر موزارلا</div>
+<div class="price">
+                340,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Classic Lasagna" data-fa="لازانیا کلاسیک">لازانیا کلاسیک</div>
+<div class="item-desc" data-en="Layers of pasta with beef, béchamel and mozzarella." data-fa="لایه‌های لازانیا با گوشت، سس بشامل و پنیر موزارلا">لایه‌های لازانیا با گوشت، سس بشامل و پنیر موزارلا</div>
+<div class="price">
+                305,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title" data-en="Burgers" data-fa="برگر">
+            برگر
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="MOTIF Burger" data-fa="برگر MOTIF">برگر MOTIF</div>
+<div class="item-desc" data-en="Grilled beef, cheddar, lettuce, tomato, pickles and house sauce." data-fa="گوشت گریل شده، پنیر چدار، کاهو، گوجه، خیارشور، سس مخصوص">
+                گوشت گریل شده، پنیر چدار، کاهو، گوجه، خیارشور، سس مخصوص
+              </div>
+<div class="price">
+                285,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Chicken Burger" data-fa="چیکن برگر">چیکن برگر</div>
+<div class="item-desc" data-en="Crispy chicken fillet, cheese, lettuce, tomato and mayonnaise sauce." data-fa="فیله مرغ سوخاری، پنیر، کاهو، گوجه، سس مایونز">
+                فیله مرغ سوخاری، پنیر، کاهو، گوجه، سس مایونز
+              </div>
+<div class="price">
+                265,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mushroom Burger" data-fa="ماشروم برگر">ماشروم برگر</div>
+<div class="item-desc" data-en="Beef, mushrooms, mozzarella and caramelized onion." data-fa="گوشت، قارچ، پنیر موزارلا، پیاز کاراملی">
+                گوشت، قارچ، پنیر موزارلا، پیاز کاراملی
+              </div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Double Cheeseburger" data-fa="دابل چیز برگر">دابل چیز برگر</div>
+<div class="item-desc" data-en="Two beef patties, cheddar, lettuce and tomato." data-fa="دو لایه گوشت، پنیر چدار، کاهو، گوجه">
+                دو لایه گوشت، پنیر چدار، کاهو، گوجه
+              </div>
+<div class="price">
+                340,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Spicy Burger" data-fa="اسپایسی برگر">اسپایسی برگر</div>
+<div class="item-desc" data-en="Beef, cheese, jalapeño and spicy sauce." data-fa="گوشت، پنیر، هالوپینو، سس تند">
+                گوشت، پنیر، هالوپینو، سس تند
+              </div>
+<div class="price">
+                305,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title" data-en="Panini" data-fa="پنینی">
+            پنینی
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Chicken Panini" data-fa="پنینی مرغ">پنینی مرغ</div>
+<div class="item-desc" data-en="Grilled chicken, cheese and fresh vegetables in toasted panini bread." data-fa="مرغ گریل‌شده، پنیر و سبزیجات تازه در نان پنینی">مرغ گریل‌شده، پنیر و سبزیجات تازه در نان پنینی</div>
+<div class="price">
+                285,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Beef Panini" data-fa="پنینی گوشت">پنینی گوشت</div>
+<div class="item-desc" data-en="Grilled beef, cheese and house sauce in toasted panini bread." data-fa="گوشت گریل‌شده، پنیر و سس مخصوص در نان پنینی">گوشت گریل‌شده، پنیر و سس مخصوص در نان پنینی</div>
+<div class="price">
+                265,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mushroom &amp; Cheese Panini" data-fa="ماشروم پنینی">ماشروم پنینی</div>
+<div class="item-desc" data-en="Mushrooms, mozzarella and creamy sauce in toasted panini bread." data-fa="قارچ، پنیر موزارلا و سس خامه‌ای در نان پنینی">قارچ، پنیر موزارلا و سس خامه‌ای در نان پنینی</div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Double Cheese Panini" data-fa="دابل چیز پنینی">دابل چیز پنینی</div>
+<div class="item-desc" data-en="Grilled beef with two cheeses and house sauce." data-fa="گوشت گریل‌شده با دو نوع پنیر و سس مخصوص">گوشت گریل‌شده با دو نوع پنیر و سس مخصوص</div>
+<div class="price">
+                340,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Spicy Panini" data-fa="اسپایسی پنینی">اسپایسی پنینی</div>
+<div class="item-desc" data-en="Beef, cheese, jalapeño and spicy sauce in toasted panini bread." data-fa="گوشت، پنیر، هالوپینو و سس تند در نان پنینی">گوشت، پنیر، هالوپینو و سس تند در نان پنینی</div>
+<div class="price">
+                305,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title" data-en="Pizza" data-fa="پیتزا">
+            پیتزا
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Pepperoni Pizza" data-fa="پیتزا پپرونی">پیتزا پپرونی</div>
+<div class="item-desc" data-en="Tomato sauce, mozzarella and pepperoni." data-fa="سس گوجه، پنیر موزارلا، پپرونی">
+                سس گوجه، پنیر موزارلا، پپرونی
+              </div>
+<div class="price">
+                335,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Special Pizza" data-fa="پیتزا مخصوص">پیتزا مخصوص</div>
+<div class="item-desc" data-en="Ham, mushrooms, bell pepper, olives and mozzarella." data-fa="ژامبون، قارچ، فلفل دلمه، زیتون، پنیر موزارلا">
+                ژامبون، قارچ، فلفل دلمه، زیتون، پنیر موزارلا
+              </div>
+<div class="price">
+                355,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Chicken &amp; Mushroom Pizza" data-fa="پیتزا مرغ و قارچ">پیتزا مرغ و قارچ</div>
+<div class="item-desc" data-en="Chicken, mushrooms, mozzarella and house sauce." data-fa="مرغ، قارچ، پنیر موزارلا، سس مخصوص">
+                مرغ، قارچ، پنیر موزارلا، سس مخصوص
+              </div>
+<div class="price">
+                345,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Vegetable Pizza" data-fa="پیتزا سبزیجات">پیتزا سبزیجات</div>
+<div class="item-desc" data-en="Mushrooms, corn, bell pepper, olives and mozzarella." data-fa="قارچ، ذرت، فلفل دلمه، زیتون، پنیر موزارلا">
+                قارچ، ذرت، فلفل دلمه، زیتون، پنیر موزارلا
+              </div>
+<div class="price">
+                315,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Four Cheese Pizza" data-fa="پیتزا چهار پنیر">پیتزا چهار پنیر</div>
+<div class="item-desc" data-en="Mozzarella, cheddar, Parmesan, Gouda and cream sauce." data-fa="موزارلا، چدار، پارمزان، گودا، سس خامه">
+                موزارلا، چدار، پارمزان، گودا، سس خامه
+              </div>
+<div class="price">
+                365,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title" data-en="Salads" data-fa="سالاد">
+            سالاد
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Seasonal Salad" data-fa="سالاد فصل">سالاد فصل</div>
+<div class="item-desc" data-en="Fresh seasonal vegetables with house dressing." data-fa="ترکیب تازه و روز سبزیجات فصل با سس مخصوص">ترکیب تازه و روز سبزیجات فصل با سس مخصوص</div>
+<div class="price">
+                285,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Caesar Salad" data-fa="سالاد سزار">سالاد سزار</div>
+<div class="item-desc" data-en="Lettuce, grilled chicken, Parmesan, croutons and Caesar dressing." data-fa="کاهو، مرغ گریل‌شده، پنیر پارمزان، کروتان و سس سزار">کاهو، مرغ گریل‌شده، پنیر پارمزان، کروتان و سس سزار</div>
+<div class="price">
+                265,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Shirazi Salad" data-fa="سالاد شیرازی">سالاد شیرازی</div>
+<div class="item-desc" data-en="Cucumber, tomato, onion and fresh lemon juice." data-fa="خیار، گوجه، پیاز و آب‌لیموی تازه">خیار، گوجه، پیاز و آب‌لیموی تازه</div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Coleslaw" data-fa="سالاد کلم">سالاد کلم</div>
+<div class="item-desc" data-en="White and purple cabbage with house dressing." data-fa="کلم سفید و بنفش با سس مخصوص">کلم سفید و بنفش با سس مخصوص</div>
+<div class="price">
+                340,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="MOTIF Salad" data-fa="سالاد Motif">سالاد Motif</div>
+<div class="item-desc" data-en="Fresh vegetables, grilled chicken and MOTIF signature dressing." data-fa="سبزیجات تازه، مرغ گریل‌شده و سس اختصاصی MOTIF">سبزیجات تازه، مرغ گریل‌شده و سس اختصاصی MOTIF</div>
+<div class="price">
+                305,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================
+           BREAKFAST
+      ================================================== -->
+<section class="page" id="breakfast">
+<h2 class="section-title" data-en="Breakfast" data-fa="صبحانه">
+          صبحانه
+        </h2>
+<div class="card">
+<div class="card-title" data-en="Breakfast" data-fa="صبحانه">
+            صبحانه
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Persian Breakfast" data-fa="صبحانه ایرانی">صبحانه ایرانی</div>
+<div class="item-desc" data-en="Cheese, walnuts, butter, jam, fresh bread and tea." data-fa="پنیر، گردو، کره، مربا، نان تازه، چای">
+                پنیر، گردو، کره، مربا، نان تازه، چای
+              </div>
+<div class="price">
+                165,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Tomato Omelette" data-fa="املت گوجه">املت گوجه</div>
+<div class="item-desc" data-en="Eggs, tomatoes, butter and seasoning." data-fa="تخم مرغ، گوجه فرنگی، کره، ادویه">
+                تخم مرغ، گوجه فرنگی، کره، ادویه
+              </div>
+<div class="price">
+                155,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Sausage &amp; Eggs" data-fa="سوسیس و تخم‌مرغ">سوسیس و تخم‌مرغ</div>
+<div class="item-desc" data-en="Sausage, eggs, butter and seasoning." data-fa="سوسیس، تخم مرغ، کره، ادویه">
+                سوسیس، تخم مرغ، کره، ادویه
+              </div>
+<div class="price">
+                175,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Sausage Omelette" data-fa="املت سوسیس">املت سوسیس</div>
+<div class="item-desc" data-en="Sausage, eggs, tomato and cheese." data-fa="سوسیس، تخم مرغ، گوجه، پنیر">
+                سوسیس، تخم مرغ، گوجه، پنیر
+              </div>
+<div class="price">
+                185,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="English Breakfast" data-fa="صبحانه انگلیسی">صبحانه انگلیسی</div>
+<div class="item-desc" data-en="Eggs, bacon, sausage, beans, mushrooms and toast." data-fa="تخم مرغ، بیکن، سوسیس، لوبیا، قارچ، نان تست">
+                تخم مرغ، بیکن، سوسیس، لوبیا، قارچ، نان تست
+              </div>
+<div class="price">
+                245,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================
+           HOOKAH
+      ================================================== -->
+<section class="page" id="hookah">
+<h2 class="section-title" data-en="Hookah" data-fa="قلیان">
+          قلیان
+        </h2>
+<div class="card">
+<div class="card-title" data-en="Hookah" data-fa="قلیان">
+            قلیان
+          </div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Two Apple Hookah" data-fa="قلیان دوسیب">قلیان دوسیب</div>
+<div class="item-desc" data-en="Classic double-apple tobacco." data-fa="تنباکوی دوسیب کلاسیک">
+                تنباکوی دوسیب کلاسیک
+              </div>
+<div class="price">
+                240,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Mint Hookah" data-fa="قلیان نعناع">قلیان نعناع</div>
+<div class="item-desc" data-en="Refreshing mint tobacco." data-fa="تنباکوی نعناع خنک">
+                تنباکوی نعناع خنک
+              </div>
+<div class="price">
+                240,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Bubblegum Hookah" data-fa="قلیان آدامس">قلیان آدامس</div>
+<div class="item-desc" data-en="Sweet bubblegum tobacco." data-fa="تنباکوی آدامس شیرین">
+                تنباکوی آدامس شیرین
+              </div>
+<div class="price">
+                250,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="Grape Hookah" data-fa="قلیان انگور">قلیان انگور</div>
+<div class="item-desc" data-en="Sweet grape tobacco." data-fa="تنباکوی انگور شیرین">
+                تنباکوی انگور شیرین
+              </div>
+<div class="price">
+                255,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+<div class="item">
+<div class="item-info">
+<div class="item-name" data-en="MOTIF Special Hookah" data-fa="قلیان ویژه MOTIF">قلیان ویژه MOTIF</div>
+<div class="item-desc" data-en="A signature blend of fruity and refreshing flavors." data-fa="ترکیب اختصاصی طعم‌های میوه‌ای و خنک">
+                ترکیب اختصاصی طعم‌های میوه‌ای و خنک
+              </div>
+<div class="price">
+                295,000
+              </div>
+</div>
+<div class="item-image">
+<img alt="" src="images/placeholder.jpg"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- =====================================================
+       OVERLAY
+  ====================================================== -->
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
+</div>
+<!-- =====================================================
+       MENU PANEL
+       تک ستونه + وسط چین
+  ====================================================== -->
+<nav aria-label="منوی کامل" class="menu-panel" id="menuPanel">
+<div class="menu-panel-title" data-en="View Menu" data-fa="مشاهده منو">
+      مشاهده منو
+    </div>
+<div class="menu-links">
+<!-- CAFE -->
+<button class="menu-link" data-en="☕ Cafe" data-fa="☕ کافه" onclick="goToCategory('cafe')" type="button">
+        ☕ کافه
+      </button>
+<button class="menu-link" data-en="Espresso Based" data-fa="اسپرسو بیس" onclick="goToCategory('cafe','اسپرسو بیس')" type="button">
+        اسپرسو بیس
+      </button>
+<button class="menu-link" data-en="Iced Drinks" data-fa="آیس" onclick="goToCategory('cafe','آیس')" type="button">
+        آیس
+      </button>
+<button class="menu-link" data-en="Milkshakes" data-fa="شیک" onclick="goToCategory('cafe','شیک')" type="button">
+        شیک
+      </button>
+<button class="menu-link" data-en="Smoothies" data-fa="اسموتی" onclick="goToCategory('cafe','اسموتی')" type="button">
+        اسموتی
+      </button>
+<button class="menu-link" data-en="Mocktails" data-fa="ماکتیل" onclick="goToCategory('cafe','ماکتیل')" type="button">
+        ماکتیل
+      </button>
+<button class="menu-link" data-en="Tea &amp; Herbal Infusions" data-fa="چای و دمنوش" onclick="goToCategory('cafe','چای و دمنوش')" type="button">
+        چای و دمنوش
+      </button>
+<!-- FOOD -->
+<button class="menu-link" data-en="🍽 Food" data-fa="🍽 غذا" onclick="goToCategory('food')" type="button">
+        🍽 غذا
+      </button>
+<button class="menu-link" data-en="Appetizers" data-fa="پیش غذا" onclick="goToCategory('food','پیش غذا')" type="button">
+        پیش غذا
+      </button>
+<button class="menu-link" data-en="Pasta &amp; Lasagna" data-fa="پاستا و لازانیا" onclick="goToCategory('food','پاستا و لازانیا')" type="button">
+        پاستا و لازانیا
+      </button>
+<button class="menu-link" data-en="Burgers" data-fa="برگر" onclick="goToCategory('food','برگر')" type="button">
+        برگر
+      </button>
+<button class="menu-link" data-en="Panini" data-fa="پنینی" onclick="goToCategory('food','پنینی')" type="button">
+        پنینی
+      </button>
+<button class="menu-link" data-en="Pizza" data-fa="پیتزا" onclick="goToCategory('food','پیتزا')" type="button">
+        پیتزا
+      </button>
+<button class="menu-link" data-en="Salads" data-fa="سالاد" onclick="goToCategory('food','سالاد')" type="button">
+        سالاد
+      </button>
+<!-- BREAKFAST -->
+<button class="menu-link" data-en="🍳 Breakfast" data-fa="🍳 صبحانه" onclick="goToCategory('breakfast')" type="button">
+        🍳 صبحانه
+      </button>
+<button class="menu-link" data-en="Breakfast" data-fa="صبحانه" onclick="goToCategory('breakfast','صبحانه')" type="button">
+        صبحانه
+      </button>
+<!-- HOOKAH -->
+<button class="menu-link" data-en="🌿 Hookah" data-fa="🌿 قلیان" onclick="goToCategory('hookah')" type="button">
+        🌿 قلیان
+      </button>
+<button class="menu-link" data-en="Hookah Flavors" data-fa="انواع قلیان" onclick="goToCategory('hookah','قلیان')" type="button">
+        انواع قلیان
+      </button>
+</div>
+</nav>
+<!-- =====================================================
+       BOTTOM BAR
+  ====================================================== -->
+<footer class="bottom-bar">
+<!-- LEFT: LANGUAGE -->
+<div class="lang">
+<button class="active" id="faBtn" onclick="setLanguage('fa')" type="button">فارسی</button>
+<button id="enBtn" onclick="setLanguage('en')" type="button">EN</button>
+</div>
+<!-- RIGHT: MENU -->
+<button aria-controls="menuPanel" aria-expanded="false" class="menu-toggle" data-en="View Menu" data-fa="مشاهده منو" id="menuToggle" onclick="toggleMenu()" type="button">
+      مشاهده منو
+    </button>
+</footer>
+<!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+<script>
+
+    /* =====================================================
+       SHOW MAIN CATEGORY
+    ====================================================== */
+
+    function showPage(page) {
+
+      document
+        .querySelectorAll(".page")
+        .forEach(function(p) {
+
+          p.classList.remove("active");
+
+        });
+
+
+      const selectedPage =
+        document.getElementById(page);
+
+
+      if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+      }
+
+
+      document
+        .querySelectorAll(".top-nav button")
+        .forEach(function(button) {
+
+          button.classList.remove("active");
+
+        });
+
+
+      const selectedButton =
+        document.getElementById(page + "Btn");
+
+
+      if (selectedButton) {
+
+        selectedButton.classList.add("active");
+
+      }
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =====================================================
+       TOGGLE MENU
+    ====================================================== */
+
+    function toggleMenu() {
+
+      const menu =
+        document.getElementById("menuPanel");
+
+      const overlay =
+        document.getElementById("menuOverlay");
+
+      const button =
+        document.getElementById("menuToggle");
+
+
+      const isOpen =
+        menu.classList.contains("show");
+
+
+      if (isOpen) {
+
+        closeMenu();
+
+      } else {
+
+        menu.classList.add("show");
+
+        overlay.classList.add("show");
+
+        button.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       CLOSE MENU
+    ====================================================== */
+
+    function closeMenu() {
+
+      const menu =
+        document.getElementById("menuPanel");
+
+      const overlay =
+        document.getElementById("menuOverlay");
+
+      const button =
+        document.getElementById("menuToggle");
+
+
+      menu.classList.remove("show");
+
+      overlay.classList.remove("show");
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+
+    /* =====================================================
+       GO TO CATEGORY / HEADER
+    ====================================================== */
+
+    function goToCategory(page, headerName) {
+
+      closeMenu();
+
+      showPage(page);
+
+
+      if (!headerName) {
+        return;
+      }
+
+
+      setTimeout(function() {
+
+        const pageElement =
+          document.getElementById(page);
+
+
+        if (!pageElement) {
+          return;
+        }
+
+
+        const cards =
+          pageElement.querySelectorAll(".card");
+
+
+        cards.forEach(function(card) {
+
+          const title =
+            card.querySelector(".card-title");
+
+
+          if (!title) {
+            return;
+          }
+
+
+          const titleText =
+            title.textContent.trim();
+
+
+          if (titleText === headerName || title.dataset.fa === headerName || title.dataset.en === headerName) {
+
+            const position =
+              card.getBoundingClientRect().top
+              + window.pageYOffset
+              - 20;
+
+
+            window.scrollTo({
+
+              top: position,
+
+              behavior: "smooth"
+
+            });
+
+          }
+
+        });
+
+      }, 150);
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE
+    ====================================================== */
+
+    function setLanguage(language) {
+
+      const faBtn = document.getElementById("faBtn");
+      const enBtn = document.getElementById("enBtn");
+      const isEnglish = language === "en";
+
+      document.documentElement.lang = isEnglish ? "en" : "fa";
+      document.documentElement.dir = isEnglish ? "ltr" : "rtl";
+
+      if (faBtn) faBtn.classList.toggle("active", !isEnglish);
+      if (enBtn) enBtn.classList.toggle("active", isEnglish);
+
+      document.querySelectorAll("[data-fa][data-en]").forEach(function(el) {
+        el.textContent = isEnglish ? el.dataset.en : el.dataset.fa;
+      });
+
+      localStorage.setItem("motifLanguage", language);
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      setLanguage(localStorage.getItem("motifLanguage") || "fa");
+    });
+
+    /* =====================================================
+       ESC KEY
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeMenu();
+
+        }
+
+      }
+    );
+
+
+  </script>
+</body>
+</html>
