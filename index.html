@@ -1065,7 +1065,7 @@
 <button class="menu-link" data-en="Tea &amp; Herbal Infusions" data-fa="چای و دمنوش" onclick="goToCategory('cafe','چای و دمنوش')" type="button">چای و دمنوش</button>
 <button class="menu-link" data-en="Ice" data-fa="آیس" onclick="goToCategory('cafe','آیس')" type="button">آیس</button>
 <button class="menu-link" data-en="Smoothies" data-fa="اسموتی" onclick="goToCategory('cafe','اسموتی')" type="button">اسموتی</button>
-<button class="menu-link" data-en="Mocktails" data-fa="ماکتیل" onclick="goToCategory('cafe','ماکتیل')" type="button">ماکتیل</button>
+<button class="menu-link" data-en="Mocktails &amp; Refreshers" data-fa="ماکتیل و رفرشر" onclick="goToCategory('cafe','ماکتیل')" type="button">ماکتیل و رفرشر</button>
 <button class="menu-link" data-en="Ice Cream &amp; Shakes" data-fa="بستنی و شیک‌ها" onclick="goToCategory('cafe','بستني و شيك ها')" type="button">بستنی و شیک‌ها</button>
 <button class="menu-link" data-en="Refreshers" data-fa="رفرشر" data-subcat-id="cafe-refresher" hidden onclick="goToCategory('cafe','رفرشر')" type="button">رفرشر</button>
 <button class="menu-link" data-en="Drip Coffee" data-fa="قهوه دمی" onclick="goToCategory('cafe','قهوه دمی')" type="button">قهوه دمی</button>
@@ -1358,7 +1358,7 @@
         "آیس": "Ice",
         "سوپر فود": "Super Food",
         "اسموتی": "Smoothies",
-        "ماکتیل": "Mocktails",
+        "ماکتیل و رفرشر": "Mocktails & Refreshers",
         "بستني و شيك ها": "Ice Cream & Shakes",
         "رفرشر": "Refreshers",
         "قهوه دمی": "Drip Coffee",
@@ -1414,6 +1414,12 @@
 
       document.documentElement.lang = isEnglish ? "en" : "fa";
       document.documentElement.dir = isEnglish ? "ltr" : "rtl";
+
+      const mocktailTitle = document.querySelector('.card[data-subcat-id="cafe-mocktail"] .card-title');
+      if (mocktailTitle) {
+        mocktailTitle.setAttribute("data-fa", "ماکتیل و رفرشر");
+        mocktailTitle.setAttribute("data-en", "Mocktails & Refreshers");
+      }
 
       if (faBtn) faBtn.classList.toggle("active", !isEnglish);
       if (enBtn) enBtn.classList.toggle("active", isEnglish);
@@ -1508,6 +1514,10 @@
         const itemInfo = item.querySelector(".item-info");
         if (price) {
           price.textContent = price.textContent.replace(/\s*تومان\s*$/, "").trim();
+          if (price.textContent.toLowerCase() === "wating" ||
+              price.textContent.toLowerCase() === "waiting") {
+            price.textContent = "";
+          }
           if (itemInfo) {
             itemInfo.appendChild(price);
             const description = itemInfo.querySelector(".item-desc");
@@ -1572,7 +1582,8 @@ var MotifPriceLoader = (function () {
       priceText: 'price_text',
       description: 'desc_fa',
       descriptionText: 'description_text',
-      descriptionEn: 'desc_en'
+      descriptionEn: 'desc_en',
+      image: 'image'
     },
 
     // اگر true باشد، مقدار price_text (متن آماده) بر price عددی اولویت دارد.
@@ -1702,6 +1713,7 @@ var MotifPriceLoader = (function () {
 
   function toBoolean(value) {
     var v = normalize(value).toLowerCase();
+    return v === 'true' || v === '1' || v === 'yes' || v === 'on';
     if (v === 'false' || v === '0' || v === 'no' || v === 'off' || v === '') {
       return false;
     }
@@ -1733,6 +1745,7 @@ var MotifPriceLoader = (function () {
 
   function applyPriceToItem(item, record) {
     var col = CONFIG.columnNames;
+    var productId = normalize(record[col.productId]);
 
     // نام محصول فقط از Google Sheet خوانده می‌شود.
     var nameFa = firstValue(record, [col.nameFa, 'name_fa']);
@@ -1768,6 +1781,11 @@ var MotifPriceLoader = (function () {
       var priceEls = item.querySelectorAll('.price');
       Array.prototype.forEach.call(priceEls, function (el) {
         el.textContent = finalPrice;
+      });
+    } else {
+      var emptyPriceEls = item.querySelectorAll('.price');
+      Array.prototype.forEach.call(emptyPriceEls, function (el) {
+        el.textContent = '';
       });
     }
 
@@ -1820,6 +1838,8 @@ var MotifPriceLoader = (function () {
       item.removeAttribute('data-inactive');
       item.setAttribute('data-active', 'true');
     }
+
+    applyImageToItem(item, record, productId);
   }
 
   function hideEmptySections() {
@@ -1962,6 +1982,50 @@ var MotifPriceLoader = (function () {
         showPage(visibleCategories[0]);
       }
     }
+
+  }
+
+  function applyImageToItem(item, record, productId) {
+    var col = CONFIG.columnNames;
+    var imageSlot = item.querySelector('.item-image');
+    if (!imageSlot || !productId) return;
+
+    var imageValue = normalize(record[col.image]);
+    var imageSources = [];
+    if (imageValue !== '') {
+      imageSources.push(imageValue);
+    }
+
+    var encodedId = encodeURIComponent(productId);
+    imageSources.push(
+      'images/' + encodedId + '.jpg',
+      'images/' + encodedId + '.jpeg',
+      'images/' + encodedId + '.png',
+      'images/' + encodedId + '.webp'
+    );
+
+    var image = imageSlot.querySelector('img');
+    if (!image) {
+      image = document.createElement('img');
+      image.alt = '';
+      image.loading = 'lazy';
+      imageSlot.appendChild(image);
+    }
+
+    var sourceIndex = 0;
+    image.onerror = function () {
+      sourceIndex++;
+      if (sourceIndex < imageSources.length) {
+        image.src = imageSources[sourceIndex];
+      } else {
+        image.removeAttribute('src');
+        imageSlot.classList.remove('has-image');
+      }
+    };
+    image.onload = function () {
+      imageSlot.classList.add('has-image');
+    };
+    image.src = imageSources[sourceIndex];
   }
 
   function moveItemsToSheetCategories(records) {
@@ -2002,8 +2066,75 @@ var MotifPriceLoader = (function () {
     );
   }
 
+  function createMissingItems(records) {
+    var col = CONFIG.columnNames;
+    var existing = {};
+
+    Array.prototype.forEach.call(
+      document.querySelectorAll('.item[data-product-id]'),
+      function (item) {
+        var productId = normalize(item.getAttribute('data-product-id'));
+        if (productId) existing[productId] = true;
+      }
+    );
+
+    records.forEach(function (record) {
+      var productId = normalize(record[col.productId]);
+      var categoryId = normalize(record[col.categoryId]);
+      var subcategoryId = normalize(record[col.subcategoryId]);
+      if (!productId || existing[productId] || !subcategoryId) return;
+
+      var card = null;
+      var cards = document.querySelectorAll('.card[data-subcat-id]');
+      Array.prototype.some.call(cards, function (candidate) {
+        if (normalize(candidate.getAttribute('data-subcat-id')) === subcategoryId) {
+          card = candidate;
+          return true;
+        }
+        return false;
+      });
+      if (!card) {
+        warn('برای subcat_id این محصول کارت HTML پیدا نشد:', subcategoryId);
+        return;
+      }
+
+      var item = document.createElement('div');
+      item.className = 'item';
+      item.setAttribute('data-category-id', categoryId);
+      item.setAttribute('data-product-id', productId);
+      item.setAttribute('data-subcat-id', subcategoryId);
+
+      var info = document.createElement('div');
+      info.className = 'item-info';
+
+      var name = document.createElement('div');
+      name.className = 'item-name';
+
+      var description = document.createElement('div');
+      description.className = 'item-desc';
+
+      var price = document.createElement('div');
+      price.className = 'price';
+      price.textContent = '';
+
+      info.appendChild(name);
+      info.appendChild(price);
+      info.appendChild(description);
+      item.appendChild(info);
+
+      var imageSlot = document.createElement('div');
+      imageSlot.className = 'item-image';
+      imageSlot.setAttribute('data-image-slot', 'true');
+      item.appendChild(imageSlot);
+
+      card.appendChild(item);
+      existing[productId] = true;
+    });
+  }
+
   function applyToDom(records) {
     var col = CONFIG.columnNames;
+    createMissingItems(records);
     var index = {};
     records.forEach(function (r) {
       var key = normalize(r[col.productId]);
@@ -2014,7 +2145,15 @@ var MotifPriceLoader = (function () {
     var items = document.querySelectorAll('.item[data-product-id]');
     Array.prototype.forEach.call(items, function (item) {
       var pid = normalize(item.getAttribute('data-product-id'));
+      if (pid && !index[pid]) {
+        item.remove();
+        return;
+      }
       if (pid && index[pid]) {
+        if (!toBoolean(index[pid][col.active])) {
+          item.remove();
+          return;
+        }
         applyPriceToItem(item, index[pid]);
         applied++;
       }
