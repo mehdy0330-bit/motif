@@ -60,7 +60,7 @@
   .hero {
     position: relative;
     width: 100%;
-    height: 150px;
+    height: 260px;
     overflow: hidden;
     background: #89977A;
 }
@@ -98,6 +98,23 @@
     flex-direction: column;
     z-index: 3;
 }
+
+    .brand-logo {
+    display: block;
+    width: min(96%, 850px);
+    height: auto;
+    max-height: 230px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    }
+
+    .hero-overlay .brand-logo {
+    width: min(96%, 850px);
+    height: auto;
+    max-height: 230px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    }
 
     .logo {
     width: 100%;
@@ -674,8 +691,19 @@
         padding-bottom: 94px;
       }
 
+      .brand-logo {
+        width: 650px;
+        max-height: 190px;
+      }
+
+      .hero-overlay .brand-logo {
+        width: 650px;
+        height: auto;
+        max-height: 190px;
+      }
+
       .hero {
-        height: 150px;
+        height: 175px;
         padding-top: 0;
       }
 
@@ -983,8 +1011,7 @@
 <header class="hero">
 <img alt="MOTIF Cafe" src="images/cafe-banner.jpeg"/>
 <div class="hero-overlay">
-<h1>MOTIF</h1>
-<div class="subtitle">CAFÉ &amp; RESTAURANT</div>
+<img class="brand-logo" src="images/LOGO.png" alt="MOTIF Cafe &amp; Restaurant"/>
 </div>
 </header>
 <div class="top-nav">
