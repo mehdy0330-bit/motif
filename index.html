@@ -2236,6 +2236,21 @@ var MotifPriceLoader = (function () {
     return '';
   }
 
+  function applyLastSavedData() {
+    var savedCsv = loadLastCsv();
+    if (!savedCsv) return false;
+    var savedRecords = csvToObjects(savedCsv);
+    if (!savedRecords.length) return false;
+    try {
+      applyToDom(savedRecords);
+      warn('آخرین نسخه ذخیره‌شده برای حالت آفلاین اعمال شد.');
+      return true;
+    } catch (e) {
+      warn('خطا در اعمال نسخه آفلاین:', e);
+      return false;
+    }
+  }
+
   /* ---------------------------- Main entry -----------------------------
    * 1) اگر کش موجود است، مستقیم همان را اعمال کن.
    * 2) در غیر این صورت CSV را fetch کن، parse کن و اعمال کن.
@@ -2255,6 +2270,12 @@ var MotifPriceLoader = (function () {
       if (typeof options.preferPriceText === 'boolean') cfg.preferPriceText = options.preferPriceText;
       if (typeof options.hideInactive === 'boolean') cfg.hideInactive = options.hideInactive;
       if (typeof options.hideEmptySections === 'boolean') cfg.hideEmptySections = options.hideEmptySections;
+    }
+
+    // ابتدا آخرین داده سالم را فوراً نمایش بده؛ سپس نسخه تازه را از شیت بگیر.
+    // این باعث می‌شود منو در حالت آفلاین منتظر timeout شبکه نماند.
+    if (!options || options.useSavedData !== false) {
+      applyLastSavedData();
     }
 
     if (!cfg.csvUrl || cfg.csvUrl.indexOf('PASTE_YOUR') === 0) {
