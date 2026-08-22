@@ -1003,6 +1003,59 @@
             line-height: 1;
         }
 
+        /* دسته‌های اصلی به‌صورت ردیف آیکونی */
+        .top-nav {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            flex-wrap: nowrap;
+            width: min(760px, calc(100% - 24px));
+            margin: 16px auto 0;
+        }
+
+        .top-nav button {
+            min-width: 0;
+            width: 100%;
+            min-height: 78px;
+            padding: 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            border-radius: 20px;
+            font-size: .86rem;
+            line-height: 1.2;
+        }
+
+        .top-nav button::before {
+            display: block;
+            font-size: 1.75rem;
+            line-height: 1;
+            filter: drop-shadow(0 3px 4px rgba(35,50,41,.18));
+        }
+
+        #cafeBtn::before { content: "☕"; }
+        #foodBtn::before { content: "🍽️"; }
+        #breakfastBtn::before { content: "🍳"; }
+        #hookahBtn::before { content: "🌿"; }
+
+        @media (max-width: 480px) {
+            .top-nav {
+                gap: 6px;
+                width: calc(100% - 16px);
+            }
+            .top-nav button {
+                min-height: 70px;
+                padding: 8px 3px;
+                border-radius: 16px;
+                font-size: .76rem;
+            }
+            .top-nav button::before {
+                font-size: 1.45rem;
+            }
+        }
+
 </style>
 </head>
 <body>
