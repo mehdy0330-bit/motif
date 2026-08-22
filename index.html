@@ -1038,7 +1038,17 @@
         #cafeBtn::before { content: "☕"; }
         #foodBtn::before { content: "🍽️"; }
         #breakfastBtn::before { content: "🍳"; }
-        #hookahBtn::before { content: "🌿"; }
+        #hookahBtn::before {
+            content: "\2248";
+            display: block;
+            font-size: 2rem;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -8px;
+            transform: rotate(-18deg);
+            filter: drop-shadow(0 3px 4px rgba(35,50,41,.18));
+        }
+        #hookahBtn .smoke-icon { display: none; }
 
         @media (max-width: 480px) {
             .top-nav {
@@ -1072,7 +1082,7 @@
 <button class="active" data-en="Cafe" data-fa="کافه" id="cafeBtn" onclick="showPage('cafe')">کافه</button>
 <button data-en="Food" data-fa="غذا" id="foodBtn" onclick="showPage('food')">غذا</button>
 <button data-en="Breakfast" data-fa="صبحانه" id="breakfastBtn" onclick="showPage('breakfast')">صبحانه</button>
-<button data-en="Hookah" data-fa="قلیان" id="hookahBtn" onclick="showPage('hookah')">قلیان</button>
+<button data-en="Hookah" data-fa="قلیان" id="hookahBtn" onclick="showPage('hookah')"><svg aria-hidden="true" class="smoke-icon" viewBox="0 0 48 48"><path d="M11 38c10-5 5-13 14-18 7-4 8-9 5-13"/><path class="accent" d="M22 39c8-5 3-10 10-14 5-3 6-7 4-10"/></svg><span>قلیان</span></button>
 </div>
 <!-- =====================================================
        MAIN
