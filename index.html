@@ -1649,8 +1649,9 @@ var MotifPriceLoader = (function () {
       image: 'image'
     },
 
-    // اگر true باشد، مقدار price_text (متن آماده) بر price عددی اولویت دارد.
-    preferPriceText: true,
+    // وقتی price عددی وجود دارد، آن را بر price_text ترجیح بده.
+    // این باعث می‌شود تغییر قیمت در ستون price همیشه در سایت اعمال شود.
+    preferPriceText: false,
 
     // آیا محصولات active=false به‌کلی hide شوند یا فقط dim شوند؟
     hideInactive: true,
@@ -1661,7 +1662,8 @@ var MotifPriceLoader = (function () {
     // فرمت‌دهی عددی قیمت.
     numberFormat: 'fa-IR',
     numberStyle: 'decimal',
-    currencySuffix: ' تومان',
+    // واحد پولی را خودکار اضافه نکن؛ مقدار شیت دقیقاً همان‌طور نمایش داده شود.
+    currencySuffix: '',
 
     // آیا category/subcat که هیچ محصول فعالی ندارند هم مخفی شوند؟
     hideEmptySections: false,
@@ -1754,7 +1756,13 @@ var MotifPriceLoader = (function () {
     return parsed.slice(1).map(function (line) {
       var obj = {};
       header.forEach(function (key, idx) {
-        obj[key] = line[idx] !== undefined ? line[idx] : '';
+        var value = line[idx] !== undefined ? line[idx] : '';
+        // بعضی خروجی‌های Google Sheets هدر price_text را چند بار دارند.
+        // مقدار اولِ غیرخالی معمولاً مقدار قابل ویرایش کاربر است؛
+        // مقدارهای بعدی (مثل قیمت قالب‌بندی‌شده قدیمی) نباید آن را بازنویسی کنند.
+        if (!Object.prototype.hasOwnProperty.call(obj, key) || normalize(obj[key]) === '') {
+          obj[key] = value;
+        }
       });
       return obj;
     });
