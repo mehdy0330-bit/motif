@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>MOTIF Cafe &amp; Restaurant</title>
+<link rel="preload" as="image" href="images/cafe-banner.jpeg" fetchpriority="high"/>
+<link rel="preload" as="image" href="images/LOGO.png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
@@ -1073,9 +1075,9 @@
        HEADER
   ====================================================== -->
 <header class="hero">
-<img alt="MOTIF Cafe" src="images/cafe-banner.jpeg"/>
+<img alt="MOTIF Cafe" src="images/cafe-banner.jpeg" width="1600" height="500" fetchpriority="high" decoding="async"/>
 <div class="hero-overlay">
-<img class="brand-logo" src="images/LOGO.png" alt="MOTIF Cafe &amp; Restaurant"/>
+<img class="brand-logo" src="images/LOGO.png" alt="MOTIF Cafe &amp; Restaurant" width="850" height="230" fetchpriority="high" decoding="async"/>
 </div>
 </header>
 <div class="top-nav">
@@ -1645,9 +1647,13 @@ var MotifPriceLoader = (function () {
       priceText: 'price_text',
       description: 'desc_fa',
       descriptionText: 'description_text',
-      descriptionEn: 'desc_en',
-      image: 'image'
+      descriptionEn: 'desc_en'
     },
+
+    // عکس محصولات فقط از خود مخزن GitHub خوانده می‌شود:
+    // images/<product_id>.webp
+    imageBasePath: 'images/',
+    imageExtension: '.webp',
 
     // وقتی price عددی وجود دارد، آن را بر price_text ترجیح بده.
     // این باعث می‌شود تغییر قیمت در ستون price همیشه در سایت اعمال شود.
@@ -2061,42 +2067,30 @@ var MotifPriceLoader = (function () {
     var imageSlot = item.querySelector('.item-image');
     if (!imageSlot || !productId) return;
 
-    var imageValue = normalize(record[col.image]);
-    var imageSources = [];
-    if (imageValue !== '') {
-      imageSources.push(imageValue);
-    }
-
-    var encodedId = encodeURIComponent(productId);
-    imageSources.push(
-      'images/' + encodedId + '.jpg',
-      'images/' + encodedId + '.jpeg',
-      'images/' + encodedId + '.png',
-      'images/' + encodedId + '.webp'
-    );
+    // عکس به Google Sheet وابسته نیست؛ مسیر مستقیماً از product_id
+    // و پوشه‌ی images داخل همین مخزن ساخته می‌شود.
+    var imageValue = CONFIG.imageBasePath +
+      encodeURIComponent(productId) + CONFIG.imageExtension;
 
     var image = imageSlot.querySelector('img');
     if (!image) {
       image = document.createElement('img');
       image.alt = '';
       image.loading = 'lazy';
+      image.decoding = 'async';
+      image.width = 84;
+      image.height = 84;
       imageSlot.appendChild(image);
     }
 
-    var sourceIndex = 0;
     image.onerror = function () {
-      sourceIndex++;
-      if (sourceIndex < imageSources.length) {
-        image.src = imageSources[sourceIndex];
-      } else {
-        image.removeAttribute('src');
-        imageSlot.classList.remove('has-image');
-      }
+      image.removeAttribute('src');
+      imageSlot.classList.remove('has-image');
     };
     image.onload = function () {
       imageSlot.classList.add('has-image');
     };
-    image.src = imageSources[sourceIndex];
+    image.src = imageValue;
   }
 
   function moveItemsToSheetCategories(records) {
